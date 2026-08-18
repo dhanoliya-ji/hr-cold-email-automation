@@ -1,0 +1,12 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Environment secrets (if you use a .env file in future)
+.env
+*.env
+
+# IDE & Editor files
+.vscode/
+.idea/
