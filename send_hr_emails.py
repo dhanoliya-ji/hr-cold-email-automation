@@ -229,7 +229,11 @@ ROLE_CATEGORIES = [
             "software engineer", "software developer",
             "sde", "fullstack", "full stack",
             "full-stack", "developer", "engineer",
-            "intern", "programmer", "python",
+            "programmer", "python",
+            # Deliberately no bare "intern". It matched any title containing
+            # the word, so "Business Analyst Intern" was served backend copy
+            # while plain "Business analyst" fell through to the generic
+            # version. Titles like "SDE Intern" still match on "sde".
         ],
         "skills": (
             "Python, C++, FastAPI, REST API design, WebSockets,"
