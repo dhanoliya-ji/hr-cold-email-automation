@@ -53,100 +53,137 @@ SENDER_EMAIL = "gajendradhanoliya01@gmail.com"
 APP_PASSWORD = os.getenv("HR_MAIL_APP_PASSWORD", "")
 
 SENDER_NAME = "Gajendra Dhanoliya"
-SENDER_PHONE = "+91-9109485566"
+SENDER_PHONE = "+91 9109485566"
+SENDER_DEGREE = "B.Tech Electrical Engineering, IIT Delhi, 2026"
 
+PORTFOLIO_URL = "https://dhanoliya-ji.github.io"
 LINKEDIN_URL = "https://www.linkedin.com/in/gajendra-dhanoliya-813345359/"
 GITHUB_URL = "https://github.com/dhanoliya-ji"
+CODEFORCES_URL = "https://codeforces.com/profile/G.Dhanoliya"
+LEETCODE_URL = "https://leetcode.com/u/dhanoliya/"
 
-# Subject line rotation
+# Subject line rotation.
+#
+# Kept deliberately plain. Dashes are avoided entirely: an em dash between the
+# role and a name reads as machine-generated to a recruiter reading forty of
+# these a day, and a few ATS subject parsers split on them. Every line here is
+# a complete phrase a person would actually type.
 SUBJECT_TEMPLATES = [
-    "Application for {role} Opportunity at {company}",
-    "Interested in {role} — {company}",
-    "{role} Opportunity — Gajendra Dhanoliya, IIT Delhi",
+    "Application for {role} at {company}",
+    "{role} at {company}: application from Gajendra Dhanoliya",
+    "Interested in the {role} role at {company}",
+    "Gajendra Dhanoliya, IIT Delhi 2026, applying for {role} at {company}",
 ]
 
 # Role categories
+#
+# Every claim below is on the resume, with the number that backs it. Nothing is
+# padded: a recruiter who forwards this to an engineer should find the same
+# facts in the PDF and on the portfolio. `proof_url` is the one link most worth
+# opening for that kind of role, so the email points at a live thing rather
+# than asking them to go hunting.
 ROLE_CATEGORIES = [
     {
         "name": "ai_ml",
         "keywords": [
+            # "data scientist" does not contain "data science", so both
+            # spellings have to be listed or the role falls through.
             "ai", "ml", "machine learning", "deep learning",
-            "data science", "computer vision", "nlp",
+            "data science", "data scientist", "scientist",
+            "computer vision", "vision", "nlp",
             "natural language", "artificial intelligence",
+            "llm", "genai", "generative", "rag", "applied ai",
         ],
         "skills": (
-            "Embeddings, Vector Databases, Semantic Search,"
-            " OCR (Tesseract, PyMuPDF),"
-            " Computer Vision (OpenCV),"
-            " Face Matching & Liveness Detection,"
-            " and Combinatorial Optimization (OR-Tools)"
+            "RAG pipelines, sentence-transformers embeddings,"
+            " vector search with pgvector and HNSW indexes,"
+            " LLM inference with Llama 3.3 on Groq,"
+            " OCR with Tesseract and PyMuPDF,"
+            " computer vision with OpenCV and dlib,"
+            " and constraint optimization with Google OR-Tools"
         ),
         "experience_highlight": (
-            "During my internship at ZeTheta Algorithms,"
-            " I developed a Video KYC pipeline using"
-            " OpenCV for face matching and liveness"
-            " detection, achieving 93% verification"
-            " accuracy."
+            "At ZeTheta Algorithms I built the Video KYC"
+            " verification pipeline: SSD ResNet-10 locates the"
+            " face in each frame, dlib turns it into a 128"
+            " dimensional embedding compared to the ID photo,"
+            " and a passive anti spoof CNN rejects printed"
+            " photos and screen replays. Tuning the threshold on"
+            " labelled ID and selfie pairs and fusing results"
+            " across frames took it to 93 percent face"
+            " verification accuracy."
         ),
         "project_highlight": (
-            "I also built a Document Intelligence"
-            " Assistant with vector embeddings in"
-            " pgvector and pluggable OpenAI/HuggingFace"
-            " semantic search capabilities."
+            "I also built DocMinds, a multi tenant RAG platform"
+            " that ingests 19 file types, runs OCR on scanned"
+            " pages, embeds each chunk into a 384 dimensional"
+            " vector stored in PostgreSQL behind a pgvector HNSW"
+            " index, and answers only from retrieved context"
+            " with a citation to the exact page it used."
         ),
+        "proof_url": "https://github.com/dhanoliya-ji/DocMinds",
+        "proof_label": "DocMinds source",
     },
     {
         "name": "data",
         "keywords": [
             "data engineer", "data analyst", "data pipeline",
             "etl", "analytics", "data processing", "big data",
+            "database", "warehouse",
         ],
         "skills": (
-            "PostgreSQL, Redis, Celery, Docker, pgvector,"
-            " async data pipelines, SQLAlchemy 2,"
-            " Alembic migrations,"
-            " and document ingestion (12+ formats)"
+            "PostgreSQL, PostGIS, pgvector, Redis,"
+            " indexing and query optimization with GiST and HNSW,"
+            " Celery background workers, async I/O,"
+            " and document ingestion across 19 file formats"
         ),
         "experience_highlight": (
-            "During my internship at ZeTheta Algorithms,"
-            " I built backend systems with"
-            " PostgreSQL-backed persistence and modular"
-            " API design for compliance-ready workflows."
+            "At ZeTheta Algorithms I built the data layer behind"
+            " an automated eKYC platform, including"
+            " PostgreSQL-backed persistence and the ingestion"
+            " path for identity documents, which cut manual"
+            " onboarding time by 60 percent."
         ),
         "project_highlight": (
-            "I also built a Document Intelligence"
-            " Assistant with an asynchronous ingestion"
-            " pipeline handling 12+ formats"
-            " (PDF, DOCX, PPTX, XLSX, HTML, EML,"
-            " images, ZIP) with automatic OCR fallback"
-            " and token-aware chunking."
+            "In DocMinds I built the ingestion and retrieval"
+            " pipeline end to end: 19 file extensions parsed"
+            " through PyMuPDF, python-docx, python-pptx, openpyxl"
+            " and BeautifulSoup, ZIP archives opened and read"
+            " recursively, Tesseract OCR triggered when a page"
+            " has under 100 characters, and 384 dimensional"
+            " vectors stored in PostgreSQL behind an HNSW cosine"
+            " index that keeps retrieval fast as the corpus grows."
         ),
+        "proof_url": "https://github.com/dhanoliya-ji/DocMinds",
+        "proof_label": "DocMinds source",
     },
     {
         "name": "frontend",
         "keywords": [
             "frontend", "front-end", "front end",
             "react", "ui developer", "ux", "web developer",
+            "next.js", "nextjs",
         ],
         "skills": (
-            "React, TypeScript, Tailwind CSS,"
-            " TanStack Query, Leaflet, Recharts,"
-            " and WebSocket streaming"
+            "React, Next.js, TypeScript, Tailwind CSS,"
+            " WebSocket streaming, and REST API integration"
         ),
         "experience_highlight": (
-            "During my internship at ZeTheta Algorithms,"
-            " I worked on building full-stack platforms"
-            " with modern frontend and backend"
-            " technologies."
+            "At ZeTheta Algorithms I worked across the stack on"
+            " an eKYC and Video KYC platform, building the guided"
+            " capture flow that walks an applicant through"
+            " document upload and liveness checks."
         ),
         "project_highlight": (
-            "I built RouteOS, a full-stack route"
-            " optimization platform with React,"
-            " real-time vehicle simulation streamed"
-            " over WebSockets, and a Redis-cached"
-            " analytics dashboard with Recharts"
-            " visualizations."
+            "I built the RouteOS front end, a React dashboard"
+            " that renders live vehicle movement on a map from a"
+            " WebSocket stream, alongside a route planner and a"
+            " Redis-cached analytics view. My portfolio is a"
+            " React and Three.js single page app if you would"
+            " like to see the front end work directly."
         ),
+        "proof_url": "https://routeos-frontend.onrender.com",
+        "proof_label": "RouteOS live demo",
     },
     {
         "name": "devops",
@@ -154,25 +191,36 @@ ROLE_CATEGORIES = [
             "devops", "cloud", "infrastructure",
             "sre", "platform engineer",
             "site reliability", "systems engineer",
+            "kubernetes", "docker",
         ],
         "skills": (
-            "Docker, Docker Compose, Prometheus,"
-            " Structured Logging, Linux, Git/GitHub,"
-            " Redis, and CI/CD pipelines"
+            "Docker and Docker Compose, container sandboxing,"
+            " AWS EC2 and VPC, Nginx reverse proxy with"
+            " auto-renewing TLS, GitHub Actions CI, Redis,"
+            " and Linux"
         ),
         "experience_highlight": (
-            "During my internship at ZeTheta Algorithms,"
-            " I architected containerized backend"
-            " services with Docker and implemented"
-            " structured logging and monitoring."
+            "At ZeTheta Algorithms I containerized the eKYC"
+            " services and set up the deployment path for them,"
+            " which made the verification pipeline reproducible"
+            " across environments."
         ),
         "project_highlight": (
-            "I designed Docker Compose orchestration"
-            " for multi-service deployments including"
-            " FastAPI backends, Celery/Redis workers,"
-            " PostgreSQL databases, and Prometheus"
-            " monitoring."
+            "RouteOS runs on AWS EC2 in a VPC public subnet with"
+            " cloud-init provisioning, every service orchestrated"
+            " by Docker Compose behind an auto-renewing TLS"
+            " reverse proxy, hardened down to 3 inbound ports"
+            " with the datastores on a private network. My coding"
+            " judge executes untrusted submissions in a fresh"
+            " container with no network, a read only filesystem,"
+            " a non root user, 128 MB of memory, 50 percent CPU"
+            " and a 2 second timeout."
         ),
+        "proof_url": (
+            "https://github.com/dhanoliya-ji/"
+            "RouteOS-Intelligent-Logistics-Fleet-Optimization-Platform"
+        ),
+        "proof_label": "RouteOS source",
     },
     {
         "name": "backend",
@@ -181,52 +229,69 @@ ROLE_CATEGORIES = [
             "software engineer", "software developer",
             "sde", "fullstack", "full stack",
             "full-stack", "developer", "engineer",
-            "intern", "programmer",
+            "intern", "programmer", "python",
         ],
         "skills": (
-            "FastAPI, REST API Design, WebSockets,"
-            " PostgreSQL, Redis, Docker,"
-            " JWT Authentication, SQLAlchemy,"
-            " Celery, and Async I/O"
+            "Python, C++, FastAPI, REST API design, WebSockets,"
+            " async I/O, Celery background workers,"
+            " PostgreSQL, Redis, Docker, JWT authentication,"
+            " and multi-tenant access control"
         ),
         "experience_highlight": (
-            "During my internship at ZeTheta Algorithms,"
-            " I engineered an automated eKYC platform"
-            " with modular REST APIs, JWT-based"
-            " authentication with RBAC, and"
-            " PostgreSQL-backed persistence, cutting"
-            " manual onboarding time by 60%."
+            "At ZeTheta Algorithms I engineered an automated eKYC"
+            " platform with modular REST APIs, JWT authentication"
+            " with role-based access control, and"
+            " PostgreSQL-backed persistence, which cut manual"
+            " onboarding time by 60 percent."
         ),
         "project_highlight": (
-            "I also built an Online Coding Judge with"
-            " Docker-sandboxed code execution, automated"
-            " evaluation pipelines, and a multi-resource"
-            " REST API across 7 domains."
+            "I built RouteOS, a fleet route optimizer that solves"
+            " the capacitated vehicle routing problem with time"
+            " windows in Google OR-Tools and cut total fleet"
+            " travel distance by 20 to 35 percent against a"
+            " greedy baseline on identical order sets, 375 km"
+            " against 576 km on 100 orders across 12 vehicles."
+            " I also built an online coding judge that runs"
+            " untrusted C++, Python and Java in a locked down"
+            " Docker sandbox across 37 REST endpoints."
         ),
+        "proof_url": "https://routeos-frontend.onrender.com",
+        "proof_label": "RouteOS live demo",
     },
 ]
 
 DEFAULT_ROLE_CONFIG = {
     "name": "default",
     "skills": (
-        "C++ (C++20), Python, TypeScript, SQL,"
-        " FastAPI, REST APIs, PostgreSQL,"
-        " Docker, and Git/GitHub"
+        "Python, C++, SQL, FastAPI, REST API design,"
+        " PostgreSQL, Redis, Docker, AWS, React and TypeScript"
     ),
     "experience_highlight": (
-        "I recently worked as a Software Engineer"
-        " Intern at ZeTheta Algorithms, where I"
-        " engineered an automated eKYC platform and"
-        " developed backend APIs, cutting manual"
-        " onboarding time by 60%."
+        "At ZeTheta Algorithms I engineered an automated eKYC"
+        " and Video KYC platform, building the backend APIs and"
+        " the face verification pipeline that reached 93 percent"
+        " accuracy, and cutting manual onboarding time by 60"
+        " percent."
     ),
     "project_highlight": (
-        "I have also built projects like RouteOS"
-        " (a logistics optimization platform) and an"
-        " Online Coding Judge with Docker-sandboxed"
-        " code execution."
+        "I have since built RouteOS, a fleet route optimizer in"
+        " Google OR-Tools that cut travel distance by 20 to 35"
+        " percent against a greedy baseline, DocMinds, a RAG"
+        " platform that cites the exact page it answered from,"
+        " and an online coding judge that runs untrusted code in"
+        " a Docker sandbox."
     ),
+    "proof_url": PORTFOLIO_URL,
+    "proof_label": "portfolio",
 }
+
+# Competitive programming line, appended when the role is engineering-ish.
+CP_LINE = (
+    "Outside of projects I am a Codeforces Specialist and"
+    " CodeChef 4 star, with over 1000 problems solved, so data"
+    " structures and complexity analysis are day to day habits"
+    " rather than interview preparation."
+)
 
 RESUME_PATH = "Resume_Gajendra_Dhanoliya.pdf"
 
@@ -262,7 +327,7 @@ LOG_FIELDS = [
 
 ENABLE_FOLLOW_UP = False
 FOLLOW_UP_AFTER_DAYS = 7
-FOLLOW_UP_SUBJECT = "Following Up — {role} at {company}"
+FOLLOW_UP_SUBJECT = "Following up on the {role} role at {company}"
 
 DAILY_SEND_LIMIT = 450
 REPORT_FILE = "report.html"
@@ -278,10 +343,25 @@ def normalize_header(value):
     return str(value).strip().lower()
 
 
+def soften_dashes(value):
+    """
+    Replace dashes that would end up in an email with plain wording.
+
+    Spreadsheet cells arrive with all sorts of punctuation, and a company
+    written as "Acme Corp — India" would otherwise put an em dash straight
+    into a subject line. Hyphenated names such as Coca-Cola are left alone;
+    only em dashes, en dashes and double hyphens are rewritten.
+    """
+    if not value:
+        return value
+    value = re.sub(r"\s*(?:—|–|--)\s*", ", ", value)
+    return re.sub(r",\s*,", ",", value).strip(" ,")
+
+
 def clean_text(value, default=""):
     if value is None:
         return default
-    value = str(value).strip()
+    value = soften_dashes(str(value).strip())
     return value if value else default
 
 
@@ -387,105 +467,210 @@ def detect_role_category(role):
     return DEFAULT_ROLE_CONFIG
 
 
+def signature_block():
+    """The plain-text sign-off. Links are spelled out so they survive clients
+    that strip HTML, and so the recruiter can copy one without opening it."""
+    return (
+        f"Best regards,\n"
+        f"{SENDER_NAME}\n"
+        f"{SENDER_DEGREE}\n"
+        f"{SENDER_PHONE}\n"
+        f"{SENDER_EMAIL}\n"
+        f"Portfolio: {PORTFOLIO_URL}\n"
+        f"GitHub: {GITHUB_URL}\n"
+        f"LinkedIn: {LINKEDIN_URL}\n"
+    )
+
+
 def build_email_body(contact):
+    """
+    Compose the cold email.
+
+    Shape is deliberate. A recruiter decides in the first two lines whether to
+    keep reading, so the opening states the role, who I am and one verifiable
+    number, rather than opening with pleasantries. The middle gives evidence,
+    the close asks for one specific thing. No dashes anywhere: they are the
+    tell that makes a cold email read as generated.
+    """
     config = detect_role_category(contact["role"])
     loc_sentence = format_location_line(contact.get("location", ""))
-    loc_paragraph = f"\n{loc_sentence}\n" if loc_sentence else ""
+    loc_paragraph = f"{loc_sentence}\n\n" if loc_sentence else ""
+
+    # Only worth mentioning competitive programming for engineering roles.
+    cp_paragraph = ""
+    if config.get("name") in ("backend", "ai_ml", "data", "default"):
+        cp_paragraph = f"{CP_LINE}\n\n"
+
+    # Skipped when the proof link is the portfolio itself, since the closing
+    # paragraph already points there and the same URL twice reads as automated.
+    proof_line = ""
+    proof_url = config.get("proof_url")
+    if proof_url and proof_url != PORTFOLIO_URL:
+        proof_line = (
+            f"You can try it here"
+            f" ({config['proof_label']}): {proof_url}\n\n"
+        )
 
     body = (
         f"Hi {contact['hr_name']},\n"
         f"\n"
-        f"I hope you're doing well.\n"
-        f"\n"
-        f"I'm Gajendra Dhanoliya, an IIT Delhi graduate"
-        f" with hands-on experience in software"
-        f" engineering. I came across the"
-        f" {contact['role']} opportunity at"
-        f" {contact['company']} and wanted to reach out"
-        f" regarding the role.\n"
+        f"I am writing about the {contact['role']} role at"
+        f" {contact['company']}. I am a 2026 IIT Delhi graduate"
+        f" who builds backend and applied AI systems, and I"
+        f" would like to be considered for it.\n"
         f"\n"
         f"{config['experience_highlight']}\n"
         f"\n"
-        f"My technical strengths include"
-        f" {config['skills']}."
-        f" {config['project_highlight']}\n"
+        f"{config['project_highlight']}\n"
+        f"\n"
+        f"{proof_line}"
+        f"The tools I work in day to day: {config['skills']}.\n"
+        f"\n"
+        f"{cp_paragraph}"
         f"{loc_paragraph}"
+        f"My resume is attached, and every project above has a"
+        f" live demo and its full source linked from my"
+        f" portfolio: {PORTFOLIO_URL}\n"
         f"\n"
-        f"I've attached my resume for your reference."
-        f" I would be grateful if you could consider"
-        f" my profile for this opportunity.\n"
+        f"Would you be open to a short call this week, or could"
+        f" you point me to the right person on the team? Happy"
+        f" to complete a task or take a technical screen"
+        f" whenever it suits you.\n"
         f"\n"
-        f"Best regards,\n"
-        f"{SENDER_NAME}\n"
+        f"{signature_block()}"
     )
     return body
 
 
 def build_follow_up_body(contact):
+    """
+    One follow-up, a week later.
+
+    Short on purpose. It adds a reason to reply rather than repeating the first
+    email, and it gives an explicit way out so the thread closes cleanly
+    instead of sitting unanswered.
+    """
     config = detect_role_category(contact["role"])
-    first_skill = config["skills"].split(",")[0].strip()
 
     body = (
         f"Hi {contact['hr_name']},\n"
         f"\n"
-        f"I hope you're doing well. I had reached out"
-        f" regarding the {contact['role']} opportunity"
-        f" at {contact['company']} about a week ago.\n"
+        f"Following up on my note last week about the"
+        f" {contact['role']} role at {contact['company']}.\n"
         f"\n"
-        f"I wanted to follow up and reiterate my"
-        f" interest in this role. I believe my"
-        f" experience with {first_skill} and related"
-        f" technologies would be a great fit.\n"
+        f"I am still very interested, and my resume is attached"
+        f" again in case the first one got buried. Since I wrote,"
+        f" the quickest way to judge whether I fit is probably"
+        f" the live demos and source on my portfolio:"
+        f" {PORTFOLIO_URL}\n"
         f"\n"
-        f"I'd be happy to discuss further at your"
-        f" convenience. My resume is attached again"
-        f" for your reference.\n"
+        f"If the position is filled or I am not the right"
+        f" profile, a one line reply telling me so is genuinely"
+        f" useful and I will stop following up. If it is still"
+        f" open, I can do a technical screen at short notice.\n"
         f"\n"
-        f"Best regards,\n"
-        f"{SENDER_NAME}\n"
+        f"{signature_block()}"
     )
     return body
 
 
+# Dashes are banned from anything a recruiter reads: em and en dashes, and the
+# double hyphen people type instead. Checked at build time so a future edit to
+# a template cannot quietly reintroduce them.
+DASH_PATTERN = re.compile(r"—|–|--")
+
+
+def assert_no_dashes(text, label):
+    """Raise if a subject or body picked up a dash. Called before every send."""
+    hit = DASH_PATTERN.search(text)
+    if hit:
+        line = text[: hit.start()].count("\n") + 1
+        snippet = text[max(0, hit.start() - 45): hit.end() + 45]
+        raise ValueError(
+            f"{label} contains {hit.group(0)!r} on line {line}. "
+            f"Rewrite it with a word instead.\n  ...{snippet.strip()}..."
+        )
+    return text
+
+
+def linkify(text):
+    """Turn bare URLs in the plain body into anchors for the HTML part."""
+    return re.sub(
+        r'(https?://[^\s<>()]+)',
+        r'<a href="\1" style="color:#1a56db;'
+        r'text-decoration:underline;">\1</a>',
+        text,
+    )
+
+
 def build_html_body(plain_body):
-    paragraphs = plain_body.strip().split("\n\n")
+    """
+    Render the HTML alternative.
+
+    The plain-text signature is stripped and replaced with a styled one, so the
+    two parts say the same thing without the text version's link list showing
+    up twice in an HTML client.
+    """
+    body_text = plain_body
+    marker = "Best regards,"
+    if marker in body_text:
+        body_text = body_text[: body_text.index(marker)]
+
+    paragraphs = body_text.strip().split("\n\n")
     html_paras = ""
     for para in paragraphs:
-        para = para.strip().replace("\n", "<br>")
-        if para:
-            html_paras += (
-                '<p style="margin:0 0 12px 0;'
-                'line-height:1.6;color:#333;">'
-                f'{para}</p>\n'
-            )
+        para = para.strip()
+        if not para:
+            continue
+        para = (
+            para.replace("&", "&amp;")
+            .replace("<", "&lt;")
+            .replace(">", "&gt;")
+        )
+        para = linkify(para).replace("\n", "<br>")
+        html_paras += (
+            '<p style="margin:0 0 14px 0;'
+            'line-height:1.65;color:#1f2937;">'
+            f'{para}</p>\n'
+        )
 
+    link = "color:#1a56db;text-decoration:none;"
     html = f"""<!DOCTYPE html>
 <html>
-<body style="font-family:Arial,Helvetica,sans-serif;
-             font-size:14px;color:#333;max-width:600px;">
+<body style="font-family:-apple-system,Segoe UI,Arial,sans-serif;
+             font-size:14px;color:#1f2937;max-width:620px;">
 {html_paras}
-<div style="margin-top:24px;padding-top:16px;
-            border-top:1px solid #ddd;">
-  <p style="margin:0;font-weight:bold;font-size:14px;
-            color:#222;">
+<p style="margin:0 0 4px 0;line-height:1.65;color:#1f2937;">
+  Best regards,
+</p>
+<div style="margin-top:12px;padding-top:14px;
+            border-top:1px solid #e5e7eb;">
+  <p style="margin:0;font-weight:600;font-size:15px;
+            color:#111827;">
     {SENDER_NAME}
   </p>
-  <p style="margin:2px 0;font-size:13px;color:#666;">
-    IIT Delhi &bull; B.Tech Electrical Engineering
+  <p style="margin:3px 0;font-size:13px;color:#6b7280;">
+    {SENDER_DEGREE}
   </p>
-  <p style="margin:2px 0;font-size:13px;color:#666;">
-    &#128222; {SENDER_PHONE}
+  <p style="margin:3px 0;font-size:13px;color:#6b7280;">
+    {SENDER_PHONE}
+    &nbsp;&bull;&nbsp;
+    <a href="mailto:{SENDER_EMAIL}" style="{link}">
+      {SENDER_EMAIL}
+    </a>
   </p>
-  <p style="margin:2px 0;font-size:13px;">
-    <a href="{LINKEDIN_URL}"
-       style="color:#0077b5;text-decoration:none;">
-      LinkedIn
+  <p style="margin:6px 0 0 0;font-size:13px;">
+    <a href="{PORTFOLIO_URL}" style="{link}font-weight:600;">
+      Portfolio
     </a>
     &nbsp;&bull;&nbsp;
-    <a href="{GITHUB_URL}"
-       style="color:#333;text-decoration:none;">
-      GitHub
-    </a>
+    <a href="{GITHUB_URL}" style="{link}">GitHub</a>
+    &nbsp;&bull;&nbsp;
+    <a href="{LINKEDIN_URL}" style="{link}">LinkedIn</a>
+    &nbsp;&bull;&nbsp;
+    <a href="{CODEFORCES_URL}" style="{link}">Codeforces</a>
+    &nbsp;&bull;&nbsp;
+    <a href="{LEETCODE_URL}" style="{link}">LeetCode</a>
   </p>
 </div>
 </body>
@@ -1195,10 +1380,22 @@ def main():
         category = detect_role_category(contact["role"])
         cat_name = category.get("name", "default")
         subject = random.choice(SUBJECT_TEMPLATES).format(**contact)
+        body = build_email_body(contact)
+
+        # A dash reaching a recruiter's inbox is the failure this guards. The
+        # company or role text comes from the spreadsheet, so it can carry one
+        # even when every template is clean; skip that contact rather than
+        # sending something that reads as generated.
+        try:
+            assert_no_dashes(subject, "Subject")
+            assert_no_dashes(body, "Body")
+        except ValueError as exc:
+            print(f"  SKIPPED: {exc}")
+            continue
+
         if is_test_self:
             subject = f"[TEST SAMPLE] {subject}"
 
-        body = build_email_body(contact)
         html_body = build_html_body(body)
 
         print(f"\n[{index}/{len(contacts_to_process)}]")

@@ -61,6 +61,34 @@ graph TD
 | 🚫 **Duplicate Prevention** | Persistently tracks all previously emailed recruiters in `send_log.csv` to ensure no contact receives duplicate messages. |
 | 📊 **Interactive Web UI** | Generates a standalone web dashboard (`report.html`) equipped with instant search and status filters. |
 | 🎛️ **Command-Line Interface** | Full CLI flag support (`--dry-run`, `--test`, `--send`, `--stats`) eliminating the need to modify source code between runs. |
+| ✍️ **Dash-Free Copy Guard** | Em dashes, en dashes and double hyphens are the strongest tell that a cold email was machine-written. `assert_no_dashes()` checks every subject and body before it is handed to SMTP, and `soften_dashes()` rewrites them out of spreadsheet cells first, so a messy `company` value cannot leak one into a subject line. Hyphenated names like Coca-Cola are left alone. |
+| 🔗 **Proof Links Per Role** | Each role category carries the one URL most worth opening for that kind of job: the DocMinds repo for AI/ML and data roles, the live RouteOS demo for backend and frontend, the RouteOS source for DevOps. The signature always carries portfolio, GitHub, LinkedIn, Codeforces and LeetCode. |
+
+---
+
+## ✉️ What the emails say
+
+Every claim in the templates is on the résumé with the number that backs it, so a
+recruiter who forwards the mail to an engineer finds the same facts in the PDF and
+on the portfolio. Nothing is padded with tools that are not in the skills section.
+
+The structure is fixed because recruiters decide in the first two lines:
+
+1. **Opening** names the role and company, who I am, and that I want the job. No
+   weather-talk preamble.
+2. **Evidence** gives the internship result, then a project result, both with
+   numbers (93% face verification accuracy, 20 to 35% distance reduction).
+3. **Proof link** points at something running, chosen by role category.
+4. **Stack line** lists only what the résumé lists.
+5. **Ask** requests one specific thing, a short call or a pointer to the right
+   person, and offers to take a screen or a task.
+
+The follow-up, sent seven days later, deliberately offers an exit: if the role is
+filled, a one-line reply is invited so the thread closes instead of going stale.
+
+To change any of it, edit `ROLE_CATEGORIES` and `build_email_body()` in
+`send_hr_emails.py`, then run `python send_hr_emails.py --dry-run 5` to read the
+output before anything is sent.
 
 ---
 
